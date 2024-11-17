@@ -28,6 +28,7 @@ img {
 /* #region header */
 .page-header {
     border-bottom: 1px solid #e7e9fc;
+    box-shadow: 0 1px 6px 0 rgba(46, 47, 66, 0.08), 0 1px 1px 0 rgba(46, 47, 66, 0.16), 0 2px 1px 0 rgba(46, 47, 66, 0.08);
 }
 
 
@@ -81,11 +82,25 @@ img {
     line-height: 1.5;
     letter-spacing: 0.02em;
     color: #2e2f42;
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-link:hover,
-.nav-link:focus {
-    color: #404bbf;
+.nav-link.current {
+    position: relative;
+}
+
+.nav-link.current::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+
+    background-color: #404bbf;
 }
 
 .contacts {
@@ -107,20 +122,32 @@ img {
     line-height: 1.5;
     letter-spacing: 0.02em;
     color: #434455;
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.nav-link:hover,
+.nav-link:focus,
 .contacts-link:hover,
-.contacts-link:focus {
+.contacts-link:focus,
+.nav-link.current {
     color: #404bbf;
 }
 .contacts-item {}
 /* #endregion */
 
 /* #region image */
-.image {
+.image  {
     background: #2e2f42;
-    width: auto;
+    max-width: 1440px;
     padding: 188px 0;
+    margin: 0 auto;
+    background-image: linear-gradient(rgba(46, 47, 66, 0.4),
+    rgba(46, 47, 66, 0.7)),
+    url(../images/image/people-office\ 1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .image-title {
@@ -185,6 +212,17 @@ padding: 120px 0;
     gap: 24px;
 }
 
+.feature-icons {
+    border: 1px solid #8e8f99;
+        border-radius: 4px;
+        width: 264px;
+        height: 112px;
+        background: #f4f4fd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
 .feature-item {
    width: 264px;
 }
@@ -241,8 +279,10 @@ padding: 120px 0;
     border-radius: 0 0 4px 4px;
         padding: 0px 0px 32px 0px;
         width: 264px;
-        height: 380px;
-    background-color: #FFFFFF
+        height: 428px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 1px 0 rgba(46, 47, 66, 0.08), 0 1px 1px 0 rgba(46, 47, 66, 0.16), 0 1px 6px 0 rgba(46, 47, 66, 0.08);
+        background: #fff;
 }
 
 .team-img {}
@@ -266,6 +306,39 @@ padding: 120px 0;
         color: #434455;
         text-align: center;
 }
+
+.icons-item {
+    width: 40px;
+    height: 40px;
+}
+
+.icons-list {
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        padding: 0;
+        margin-bottom: 32px;
+}
+
+.icons-linc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #4d5ae5;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icons-linc .icons {
+    width: 16px;
+        height: 16px;
+        fill: #f4f4fd;
+        display: block;
+}
+
 /*#endregion */
 
 /* #region portfolio */
@@ -301,6 +374,35 @@ padding: 120px 0;
 }
 
 .portfolio-item {
+position: relative;
+overflow: hidden;
+}
+
+.portfolio-overlay {
+    background-color: #4d5ae5;
+    color: #f4f4fd;
+    font-family: sans-serif;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(100%);
+    transition: transform 250ms ease-in-out;
+    font-weight: 400;
+}
+.overlay-text {
+    padding: 40px 32px;
+    font-size: 16px;
+        line-height: 1.5;
+        letter-spacing: 0.02em;
+        color: #f4f4fd;
+}
+
+
+.portfolio-item:hover 
+.portfolio-overlay {
+    transform: translateY(0);
 }
 
 .portfolio-subtitle {
@@ -322,9 +424,19 @@ padding: 120px 0;
 /*#endregion */
 
 /* #region footer */
+
+.footer-logo {
+ margin-right: 120px; 
+}
+
 .page-footer {
     background: #2e2f42; 
     padding: 100px 0; 
+  
+}
+
+.page-footer .container {
+     display: flex;
 }
 
 .logo {
@@ -332,12 +444,12 @@ padding: 120px 0;
     line-height: 1.17
 }
 
-.footer-logo .logo-part {
+.footer-linc .logo-part {
     color: #f4f4fd;
     margin-bottom: 16px;
 }
 
-.footer-logo {
+.footer-linc {
     margin-bottom: 16px;
     display: inline-block;
 }
@@ -350,5 +462,23 @@ padding: 120px 0;
         line-height: 1.5;
         letter-spacing: 0.02em;
         color: #f4f4fd;
+}
+
+.footer-icons {
+    display: block;
+    width: 238px;
+        height: 80px;
+        margin: 0 auto;
+        margin-left: 0;
+        padding: 0 15px;
+}
+
+.footer-icons p {
+    margin-bottom: 16px;
+    font-weight: 500;
+        font-size: 16px;
+        line-height: 1.5;
+        letter-spacing: 0.02em;
+        color: #fff;
 }
 /* #endregion */
